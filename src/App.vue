@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import  axios from 'axios';
 import Header from './components/Header.vue';
 import CardList from './components/CardList.vue'
-
+import Draver from './components/Draver.vue'
 const items = ref([])
 
 onMounted(async () => {
@@ -16,6 +16,7 @@ onMounted(async () => {
 })
 </script>
 <template>
+	<Draver />
 	<div class="bg-indigo-200 mx-auto w-4/5 h-full rounded-3xl">
 		<Header />
 		<div class="m-10">
