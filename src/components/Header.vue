@@ -2,7 +2,7 @@
 
 </script>
 <template>
-	<header class="flex justify-between p-10 border-b border-zinc-500	">
+	<header class="flex justify-between p-10 border-b border-zinc-500	 mt-5 ">
 		<div class="flex items-center">
 			<img src="/logo-laptop-particular.png" alt="logo">
 			<div class="ml-5">
