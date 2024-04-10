@@ -1,14 +1,13 @@
 <script setup>
-import DraverHead from './DraverHead.vue'
+import DrawerHead from './DrawerHead.vue'
 import CartListItem from './CartListItem.vue';
 </script>
 <template>
-	<div class="fixed bg-black/50 top-0 left-0 w-4/5 h-full z-10">	</div>
-		<div class="fixed bg-white w-1/5 h-full top-0 right-0 p-5">
+	<div class="fixed bg-black/50 top-0 left-0 w-4/5 h-full z-20">	</div>
+		<div class="fixed bg-white w-1/5 h-full top-0 right-0 p-5 z-30">
 			<div class="mb-5">
-				<DraverHead />
+				<DrawerHead />
 			</div>
-
 			<CartListItem />
 
 			<div class="flex flex-col gap-4 my-7">
