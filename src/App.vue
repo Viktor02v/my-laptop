@@ -57,7 +57,7 @@ provide('cart', {
 
 </script>
 <template>
-	<Drawer  v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" />
+	<Drawer v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" />
 
 	<div class="bg-indigo-200 mx-auto w-4/5 h-full rounded-3xl">
 		<Header :total-price="totalPrice" @cart-open="cartOpen" />
@@ -66,6 +66,17 @@ provide('cart', {
 			<router-view></router-view>
 		</div>
 
+		<div class=" flex justify-between p-10 items-center">
+			<div class="">
+				<h2>Created by:</h2>
+				<b> Viktor Petruk</b>
+			</div>
+			<div class="flex gap-5">
+				<a href="https://github.com/Viktor02v"> GitHub</a>
+				<a href="https://Netlify.com/Viktor02vNetli"> Netlify</a>
+				<a href="https://instagram.com/_avangard_swg">Insta</a>
+			</div>
+		</div>
 	</div>
 </template>
 <style></style>

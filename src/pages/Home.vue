@@ -20,6 +20,7 @@
 	<div>
 		<CardList v-auto-animate :items="items" @addToFavorite="addToFavorite" @onClickAddPlus="onClickAddPlus" />
 	</div>
+	
 </template>
 
 <script setup>
