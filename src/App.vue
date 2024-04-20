@@ -1,43 +1,71 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import axios from 'axios'
-import Header from './components/Header.vue'
 
-const items = ref([])
+import { ref, watch, provide, computed } from 'vue'
+import Header from './components/Header.vue';
+import Drawer from './components/Drawer.vue'
 
-defineProps({
-	title: String,
-	price:Number,
-	imageUrl:String,
-})
-onMounted(async () => {
-	try {
-		const {data} =  axios.get('https://54585bc361381db8.mokky.dev/items');
-		items.value = data;
-		console.log(data)
-	} catch (error) {
-		console.log(error)
+// For Cart: START
+
+const cart = ref([])
+
+const drawerOpen = ref(false)
+
+const cartOpen = () => {
+	drawerOpen.value = true
+}
+const cartClose = () => {
+	drawerOpen.value = false
+}
+
+const onClickAddPlus = (item) => {
+	if (!item.isAdded) {
+		addToCart(item);
+	} else {
+		removeFromCart(item);
 	}
+}
 
+const addToCart = (item) => {
+	cart.value.push(item)
+	item.isAdded = true
+}
+
+const removeFromCart = (item) => {
+	cart.value.splice(cart.value.indexOf(item), 1)
+	item.isAdded = false
+}
+
+const totalPrice = computed(() => cart.value.reduce((acc, item) => acc + item.price, 0))
+
+const vatPrice = computed(() => Math.round(totalPrice.value * 5) / 100)
+
+// For Cart: END
+
+watch(cart, () => {
+	localStorage.setItem('cart', JSON.stringify(cart.value))
+},
+	{ deep: true }
+)
+
+provide('cart', {
+	cart,
+	onClickAddPlus,
+	removeFromCart,
+	cartOpen,
+	cartClose,
 })
 
 </script>
 <template>
-	<div class="bg-indigo-200 mx-auto w-4/5 h-full">
-		<Header />
+	<Drawer  v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" />
+
+	<div class="bg-indigo-200 mx-auto w-4/5 h-full rounded-3xl">
+		<Header :total-price="totalPrice" @cart-open="cartOpen" />
+
 		<div class="m-10">
-			<h2 class="text-3xl mb-10">All laptops</h2>
-			<div class="grid grid-cols-4 gap-5">
-				<div class="bg-white py-10  px-5 rounded-2xl">
-					<img src="/laptops/macBook.jpg" alt="">
-					<p class="mt-5">MacBook Air 13</p>
-					<div class="mt-1 block">
-						<span class="text-gray-500 block">Price:</span>
-						<b> {{price}} UAN</b>
-					</div>
-				</div>
-			</div>
+			<router-view></router-view>
 		</div>
+
 	</div>
 </template>
 <style></style>
